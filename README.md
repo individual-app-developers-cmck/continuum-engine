@@ -1,4 +1,4 @@
-# Continuum Engine (Zero-Trust Token Routing API)
+# Continuum Engine 
 
 **Enterprise middleware that visualizes the "invisible labor" of intelligence and constantizes inference OPEX.**
 
