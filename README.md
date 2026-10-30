@@ -2,23 +2,22 @@ Continuum Engine
 
 Enterprise middleware that visualizes the "invisible labor" of intelligence and constantizes inference OPEX.
 
-1. System Philosophy: Visualizing the Labor (Tokens) of AI
+1. System Philosophy: Visualizing the Dedicated Labor (Tokens) of AI
 
-Normally, when delegating complex tasks to an AI agent, the frontend perceives only a simple, single API roundtrip returning an answer.
+Normally, when we delegate a task to intelligence (AI), it appears from the frontend as a simple "single API call" that instantly returns a smart deliverable.
 
-Behind that surface, however, autonomous agents perform heavy, invisible tasks:
+But how does the AI operate behind the scenes?
+As AI deepens its autonomous (Agentic) reasoning and search capabilities, it dutifully holds onto past contexts, traverses vast search networks, and repeats immense trial-and-error processes in the background to derive the best possible answer for you.
 
-Parsing and organizing user intent
+We have visualized this dedicated labor of intelligence through the metric of "tokens."
 
-Executing live grounding across broad web spaces
+The role of the Continuum Engine is to route requests so that AI can perform at its absolute clearest, without being forced into computational exhaustion. By gently organizing this invisible labor at the edge layer and handing over only the highly purified information the AI truly needs to face, its reasoning process becomes dramatically sharpened.
 
-Sifting and ranking primary sources
+What does this approach bring to your infrastructure?
+It completely visualizes "exactly what numbers the inference tokens will reach" and "where and how much token load is being generated in the background."
 
-Injecting massive context blocks into sliding conversational buffers
-
-Continuum Engine exposes and visualizes this invisible labor through the transparent metric of tokens.
-
-By decoupling client routing from protected backend inference, this middleware strips computational noise at the edge and feeds only high-density, purified context to the model. You get absolute visibility into where, why, and how many tokens are being consumed behind the scenes—enabling deterministic control over your infrastructure FinOps.
+By transforming the black box of AI operations into transparent numbers, you gain precise control over fluctuating infrastructure OPEX.
+Continuum Engine is a middleware designed to harmonize a deep respect for intelligence with predictable, sustainable infrastructure operations (FinOps).
 
 2. Repository Structure (Open Core Model)
 
@@ -69,7 +68,7 @@ Acquisition: Click the activation badge above to complete the one-time $60 licen
 
 Deterministic Redirect: Upon payment confirmation, Stripe immediately routes your browser to the dedicated Activation Console (setup.html).
 
-IAM & Doc Binding: Follow the instructions displayed in the console to bind your private Google Doc (BYOD storage cooling) with the designated backend service identity.
+IAM & Doc Binding: Follow the instructions displayed in the console to grant edit permissions to our background service identity on your private Google Doc (BYOD storage cooling).
 
 Instant Verification: The console outputs your ready-to-run verification command and token. Copy and paste it directly into your terminal.
 
@@ -99,10 +98,18 @@ When running requests through client-kernel.js, your terminal reveals the physic
 ==================================================
 
 
-6. Notice & Operational Constraints
+6. Security Gates & Operational Compliance (Read Before Use)
 
-Strict Hardware Quota: Every license is backed by a physical 800-request circuit breaker. When the cap is reached, the gate closes deterministically to eliminate infinite loops and unexpected cloud billing runaways.
+To guarantee microsecond-level latency and protect upstream Cloud resources from cost contamination, automated edge gates (Gate 0 and Gate 0.5) enforce non-negotiable request policies. Users who do not follow the operational constraints below will be dropped at the perimeter without manual exception handling:
 
-Zero-Tolerance Exploit Defense: Incoming payloads pass through pre-parsing syntax inspectors (transportGate / payloadGate). Requests containing known injection vectors or jailbreak sequences trigger immediate key revocation without refund.
+Strict Payload Ceiling (32 KB Limit): Requests with a payload exceeding 32 KB are rejected immediately at Gate 0 (413 Payload Too Large) prior to body parsing. Keep queries, prompts, and contexts within this boundary.
 
-International Use Only: This distribution is dedicated strictly to international entities and non-Japanese residents. Transactions originating from Japanese credit issuers are filtered at the payment gateway level for tax and resource optimization under our zero-support operations model.
+Zero-Tolerance Exploit Defense: Prompts matching static prompt-injection patterns, automated exploit scanners, or unauthorized jailbreak sequences trigger immediate key revocation without refund.
+
+Clean Engineering Query Discipline: If conducting security research or systems architecture design, evaluate concepts through standard analytical queries. Do not execute raw instruction overrides or bypass attempts directly against production gates.
+
+Deterministic Quota Termination: Every license is backed by a physical 800-request circuit breaker. When the cap is reached, the gate closes deterministically to eliminate infinite loops and unexpected cloud billing runaways. Renewals require a new one-time provisioning cycle.
+
+International Use Only: This distribution is dedicated strictly to international entities and non-Japanese residents. Transactions originating from Japanese credit issuers or domestic IPs are filtered at the payment gateway level for tax and resource optimization under our zero-support operations model.
+
+Strict Zero-Support Policy: By design, this open-core architecture is targeted exclusively at experienced software engineers, SREs, and CTOs. No manual technical support, custom exception routing, or post-revocation appeals are provided.
