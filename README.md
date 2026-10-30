@@ -1,41 +1,99 @@
-# Continuum Engine 
+Continuum Engine
 
-**Enterprise middleware that visualizes the "invisible labor" of intelligence and constantizes inference OPEX.**
+Enterprise middleware that visualizes the "invisible labor" of intelligence and constantizes inference OPEX.
 
-## 1. System Philosophy: Visualizing the Dedicated Labor (Tokens) of AI
+1. System Philosophy: Visualizing the Labor (Tokens) of AI
 
-Normally, when we delegate a task to intelligence (AI), it appears from the frontend as a simple "single API call" that instantly returns a smart deliverable.
+Normally, when delegating complex tasks to an AI agent, the frontend perceives only a simple, single API roundtrip returning an answer.
 
-But how does the AI operate behind the scenes?
-As AI deepens its autonomous (Agentic) reasoning and search capabilities, it dutifully holds onto past contexts, traverses vast search networks, and repeats immense trial-and-error processes in the background to derive the best possible answer for you.
+Behind that surface, however, autonomous agents perform heavy, invisible tasks:
 
-We have visualized this dedicated labor of intelligence through the metric of "tokens."
+Parsing and organizing user intent
 
-The role of the Continuum Engine is to route requests so that AI can perform at its absolute clearest, without being forced into computational exhaustion. By gently organizing this invisible labor at the edge layer and handing over only the highly purified information the AI truly needs to face, its reasoning process becomes dramatically sharpened.
+Executing live grounding across broad web spaces
 
-What does this approach bring to your infrastructure?
-It completely visualizes **"exactly what numbers the inference tokens will reach"** and **"where and how much token load is being generated in the background."**
+Sifting and ranking primary sources
 
-By transforming the black box of AI operations into transparent numbers, you gain precise control over fluctuating infrastructure OPEX.
-Continuum Engine is a middleware designed to harmonize a deep respect for intelligence with predictable, sustainable infrastructure operations (FinOps).
+Injecting massive context blocks into sliding conversational buffers
 
-## 2. Repository Structure (Open Core Model)
-In this repository, only the middleware implementation (`client-kernel.js`) for securely connecting your client application to the Continuum Engine is published as Open Source Software (OSS).
+Continuum Engine exposes and visualizes this invisible labor through the transparent metric of tokens.
 
-* `client-kernel.js`: A lightweight client that routes requests from your application to our API and safely manages state (Session IDs and Doc IDs).
-* **Core API (Backend)**: The Intellectual Property (IP) of the routing logic—handling security, pre-purging, external synchronization, and dynamic auditing—is completely isolated and protected within a secure GCP backend.
+By decoupling client routing from protected backend inference, this middleware strips computational noise at the edge and feeds only high-density, purified context to the model. You get absolute visibility into where, why, and how many tokens are being consumed behind the scenes—enabling deterministic control over your infrastructure FinOps.
 
-## 3. Integration Concept
-Based on strict Zero-Trust principles, this system does not expose public endpoints or shared demo keys. To protect the infrastructure from malicious traffic, all authentication credentials are individually provisioned.
+2. Repository Structure (Open Core Model)
 
-By using the **Private Endpoint** and **Secure API Key** issued after obtaining a license, you can invoke edge-layer token compression and inference as shown below:
+This repository distributes only the lightweight client kernel (client-kernel.js) under an open-source model.
 
-```bash
-# Turn 1: Baseline measurement and initial inference (Endpoint and Key issued via console post-purchase)
-curl -X POST "<YOUR_PRIVATE_ENDPOINT_ALLOCATED_VIA_DASHBOARD>" \
+[ Your Application / Terminal ]
+             │  (client-kernel.js)
+             ▼
+    [ 🔒 Gate 0 / 0.5 Interceptors ]  <-- Static Sanitization & Injection Defense
+             │
+             ▼  (Authorized Route)
+ [ Continuum Engine Core Engine ]     <-- Vertex AI + Drive Sync + Dynamic Audit
+
+
+client-kernel.js: Pure JavaScript/Node.js client. Standardizes payloads, handles state persistence (Doc ID / Session ID), and parses transparent FinOps telemetry.
+
+Core API Engine (Cloud Backend): Closed intellectual property. Enforces hardware-level quotas, sanitizes search results, purges redundant history, and securely cools state into your private Google Docs.
+
+3. Integration Concept
+
+To safeguard physical infrastructure from automated scraping and unauthenticated misuse, public endpoints, shared keys, and backend service accounts are never exposed in public repositories.
+
+All credentials and dynamic run commands are provisioned strictly inside the post-payment Activation Console.
+
+Execution Blueprint
+
+# Generated deterministically inside your post-payment Activation Console:
+curl -X POST "<ALLOCATED_PRIVATE_ENDPOINT>" \
   --max-time 300 \
   -H "Content-Type: application/json" \
-  -H "x-api-key: <YOUR_SECURE_API_KEY>" \
+  -H "<YOUR_ALLOCATED_AUTH_HEADER>: <YOUR_PROVISIONED_AUTH_TOKEN>" \
   -d '{
-    "message": "Provide Zero-Trust requirements to prevent autonomous AI token thermal runaway in a GCP environment."
+    "message": "<ENTER_YOUR_QUERY_HERE>"
   }'
+
+
+Note: The exact authorization header structure, target endpoint URL, and one-click copyable curl script are automatically generated inside your activation screen once verified.
+
+4. Commercial License & Activation Gate
+
+Full execution rights for the Continuum Engine core backend are provisioned on a one-time infrastructure acquisition model ($60.00 USD / 800-Request hard quota). No monthly recurring traps, no seat-based consulting fees.
+
+To protect origin infrastructure from unauthenticated traffic, access keys are released strictly via our secured Stripe gateway:
+
+Verification & Setup Workflow
+
+Acquisition: Click the activation badge above to complete the one-time $60 license allocation.
+
+Deterministic Redirect: Upon payment confirmation, Stripe immediately routes your browser to the dedicated Activation Console (setup.html).
+
+IAM & Doc Binding: Follow the instructions displayed in the console to bind your private Google Doc (BYOD storage cooling) with the designated backend service identity.
+
+Instant Verification: The console outputs your ready-to-run verification command and token. Copy and paste it directly into your terminal.
+
+5. Telemetry & Terminal Experience
+
+When running requests through client-kernel.js, your terminal reveals the physical compute breakdown behind the model's output:
+
+==================================================
+🤖 [AI RESPONSE]
+==================================================
+(Grounding-verified authoritative engineering response)
+--------------------------------------------------
+🔗 [VERIFIED PRIMARY SOURCES]
+  1. Google Cloud Architecture Framework
+     https://cloud.google.com/...
+--------------------------------------------------
+📝 [STATE STORAGE] History successfully synced to your private Google Doc.
+--------------------------------------------------
+🔍 [FINOPS TELEMETRY BREAKDOWN]
+  ├─ T_input (Optimized Prompt)     : 210 tokens
+  ├─ T_grounding (Dynamic Search)   : 4,820 tokens  <-- Labor expended behind the scenes
+  └─ T_output (Generated Result)    : 640 tokens
+  🛡️ Edge Purge (Tokens Prevented) : 1,200 tokens
+  📉 Net Billed Consumption        : 5,670 tokens
+==================================================
+💳 Quota Balance: 799 requests remaining
+==================================================
