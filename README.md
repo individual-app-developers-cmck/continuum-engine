@@ -97,3 +97,12 @@ When running requests through client-kernel.js, your terminal reveals the physic
 ==================================================
 💳 Quota Balance: 799 requests remaining
 ==================================================
+
+
+6. Notice & Operational Constraints
+
+Strict Hardware Quota: Every license is backed by a physical 800-request circuit breaker. When the cap is reached, the gate closes deterministically to eliminate infinite loops and unexpected cloud billing runaways.
+
+Zero-Tolerance Exploit Defense: Incoming payloads pass through pre-parsing syntax inspectors (transportGate / payloadGate). Requests containing known injection vectors or jailbreak sequences trigger immediate key revocation without refund.
+
+International Use Only: This distribution is dedicated strictly to international entities and non-Japanese residents. Transactions originating from Japanese credit issuers are filtered at the payment gateway level for tax and resource optimization under our zero-support operations model.
