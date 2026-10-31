@@ -61,7 +61,7 @@ To shield our infrastructure, credentials are issued solely via our verified che
 
 <p align="center">
   <br />
-  <a href="(https://buy.stripe.com/test_28E7sKgOGe3Z3n66ec6oo00)">
+  <a href="https://buy.stripe.com/test_28E7sKgOGe3Z3n66ec6oo00">
     <img src="https://img.shields.io/badge/Stripe%20Checkout-Activate%20Private%20Engine%20($60)-635BFF?style=for-the-badge&logo=stripe&logoColor=white" alt="Stripe Activation Gate" />
   </a>
   <br />
