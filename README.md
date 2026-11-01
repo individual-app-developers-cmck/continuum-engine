@@ -31,7 +31,7 @@ This repository distributes only the lightweight client kernel (`client-kernel.j
 
 ## 3. Integration & Data Sovereignty (The Power of Choice)
 
-Based on strict Zero-Trust principles, this system does not expose public endpoints. All authentication credentials are individually provisioned.
+Based on strict Zero-Trust principles, this system does not expose public endpoints. All authentication credentials and protocol structures are strictly provisioned individually.
 
 More importantly, **you retain absolute control over your data footprint.** The engine operates with two distinct memory modes, entirely dictated by your client-side configuration:
 
@@ -51,38 +51,62 @@ To shield our infrastructure, credentials are issued solely via our verified che
 ### Authorization Steps
 1. **Authorize:** Complete the one-time $60 license acquisition via the activation badge above.
 2. **Deterministic Redirect:** Upon verified checkout, you are redirected immediately to the private setup console (`setup.html`) with your transaction-bound session proof.
-3. **Provisioning:** Retrieve your private endpoint and dedicated API key, and choose your preferred data retention mode (Stateful or Stateless).
+3. **Provisioning:** Retrieve your private endpoint (`<YOUR_PROVISIONED_ENDPOINT>`), your dedicated API key (`<YOUR_PROVISIONED_AUTH_TOKEN>`), and the **hidden authentication header name**.
 
 ## 5. Baseline measurement and edge-layer optimization
 
-You can instantly verify the cost-compression logic from your terminal. Choose the command snippet that matches your environment (Bash, PowerShell, or CMD).
+You can instantly verify the cost-compression logic from your terminal. Replace the placeholders with the exact credentials and hidden protocol headers obtained from your setup console, and enter your prompt in `<ENTER_YOUR_MESSAGE_HERE>`.
 
 ### For Mac / Linux (Bash)
 ```bash
-curl -X POST "https://continuum-engine-10698305767.asia-northeast1.run.app/" \
+# [WARNING] All requests are inspected by Gate 0 Edge Interceptor.
+# Malicious payloads or protocol guessing will trigger immediate token revocation.
+
+curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" \
   --max-time 300 \
   -H "Content-Type: application/json" \
-  -H "x-api-key: <YOUR_PROVISIONED_AUTH_TOKEN>" \
-  -d '{"message": "<ENTER_YOUR_QUERY_HERE>"}'
+  -H "<HEADER_REVEALED_POST_PURCHASE>: <YOUR_PROVISIONED_AUTH_TOKEN>" \
+  -H "x-client-trace-context: req-$(date +%s)" \
+  -H "User-Agent: Continuum-Enterprise-Client/1.0" \
+  -d '{
+    "message": "<ENTER_YOUR_MESSAGE_HERE>",
+    "sessionId": "strict-session-001"
+  }'
 ```
 
 ### For Windows (PowerShell)
 ```powershell
-$body = @{ message = "<ENTER_YOUR_QUERY_HERE>" } | ConvertTo-Json -Compress
-Invoke-RestMethod -Uri "https://continuum-engine-10698305767.asia-northeast1.run.app/" `
+# [WARNING] Edge Interceptor is active. Unrecognized User-Agents or 
+# malicious injection attempts will permanently revoke your $60 token.
+
+$body = @{ 
+    message = "<ENTER_YOUR_MESSAGE_HERE>"
+    sessionId = "strict-session-$(Get-Date -UFormat %s)" 
+} | ConvertTo-Json -Compress
+
+Invoke-RestMethod -Uri "<YOUR_PROVISIONED_ENDPOINT>" `
   -Method Post `
-  -Headers @{ "Content-Type" = "application/json"; "x-api-key" = "<YOUR_PROVISIONED_AUTH_TOKEN>" } `
+  -Headers @{ 
+      "Content-Type" = "application/json"; 
+      "<HEADER_REVEALED_POST_PURCHASE>" = "<YOUR_PROVISIONED_AUTH_TOKEN>";
+      "x-client-trace-context" = [guid]::NewGuid().ToString();
+      "User-Agent" = "Continuum-Enterprise-Client/1.0"
+  } `
   -Body $body `
   -TimeoutSec 300
 ```
 
 ### For Windows (CMD)
 ```cmd
-curl -X POST "https://continuum-engine-10698305767.asia-northeast1.run.app/" ^
+REM [WARNING] Zero-Trust Gate 0 is active. Payload anomaly detection enabled.
+
+curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
   --max-time 300 ^
   -H "Content-Type: application/json" ^
-  -H "x-api-key: <YOUR_PROVISIONED_AUTH_TOKEN>" ^
-  -d "{\"message\": \"<ENTER_YOUR_QUERY_HERE>\"}"
+  -H "<HEADER_REVEALED_POST_PURCHASE>: <YOUR_PROVISIONED_AUTH_TOKEN>" ^
+  -H "x-client-trace-context: req-%RANDOM%" ^
+  -H "User-Agent: Continuum-Enterprise-Client/1.0" ^
+  -d "{\"message\": \"<ENTER_YOUR_MESSAGE_HERE>\", \"sessionId\": \"strict-session-001\"}"
 ```
 
 *(Note: Session state and external storage pointers returned in the payload are automatically managed by the OSS client for subsequent turns, keeping database queries at constant $O(1)$ complexity. For a rich UI experience with a spinner and formatted FinOps tables, integrate the included `client-kernel.js` into your Node.js app.)*
