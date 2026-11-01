@@ -9,24 +9,24 @@
 class ContinuumClient {
   /**
    * @param {string} endpointUrl - 決済後に発行された専用APIエンドポイントURL
+   * @param {string} authHeaderName - 決済後に指定される専用ヘッダー名 (Zero-Trust対応)
    * @param {string} continuumToken - $60で購入した専用アクセス資格 (Continuum Token)
    * @param {string} docId - (任意) 会話履歴の外部冷却（同期）先となるGoogle Docs ID
    */
-  constructor(endpointUrl, continuumToken, docId = null) {
+  constructor(endpointUrl, authHeaderName, continuumToken, docId = null) {
     this.endpointUrl = endpointUrl;
-    this.continuumToken = continuumToken; // 変数名を統一
+    this.authHeaderName = authHeaderName; // ▼ 変更: ヘッダー名も外部から注入させる
+    this.continuumToken = continuumToken;
     this.docId = docId;
     this.sessionId = `session_${Date.now()}`;
   }
 
   /**
    * 【デモ・ターミナル検証用メソッド】
-   * AIへメッセージを送信し、結果と「トークンの歪み」レポートをターミナルに美しく描画します。
-   * @param {string} message - 送信するテキスト
    */
   async ask(message) {
-    if (!this.continuumToken) {
-      console.error("🚨 エラー: Continuum Tokenが設定されていません。");
+    if (!this.continuumToken || !this.authHeaderName) {
+      console.error("🚨 エラー: アクセス資格またはヘッダー名が設定されていません。");
       return;
     }
     
@@ -43,8 +43,7 @@ class ContinuumClient {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // ※ソースコード上はシステム要件としてヘッダー名を指定
-          "x-api-key": this.continuumToken 
+          [this.authHeaderName]: this.continuumToken // ▼ 変更: 動的プロパティ名でヘッダーをセット（直書き排除）
         },
         body: JSON.stringify({
           message: message,
@@ -71,18 +70,17 @@ class ContinuumClient {
 
   /**
    * 【システム組み込み専用メソッド】
-   * AIへメッセージを送信し、純粋なレスポンスデータ（JSON）を返します。
    */
   async query(message) {
-    if (!this.continuumToken) {
-      throw new Error("🚨 エラー: Continuum Tokenが設定されていません。");
+    if (!this.continuumToken || !this.authHeaderName) {
+      throw new Error("🚨 エラー: アクセス資格またはヘッダー名が設定されていません。");
     }
 
     const response = await fetch(this.endpointUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": this.continuumToken
+        [this.authHeaderName]: this.continuumToken // ▼ 変更: 動的プロパティ名でヘッダーをセット
       },
       body: JSON.stringify({
         message: message,
@@ -137,7 +135,6 @@ class ContinuumClient {
       console.log("==================================================");
     }
     
-    // 表示をContinuum Tokenの残弾に変更
     console.log(`💳 Continuum Token 残弾: 残り ${remaining_requests} 回`);
     console.log("==================================================\n");
   }
