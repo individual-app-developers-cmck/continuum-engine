@@ -3,19 +3,18 @@
  * ============================================================================
  * Continuum Engine - OSS Client Kernel (client-kernel.js)
  * ============================================================================
- * 目的: ASI-OPEX Engineの有償APIを安全かつ簡単に呼び出すためのミドルウェア。
+ * 目的: ASI-OPEX Engineの専用APIを安全かつ簡単に呼び出すためのミドルウェア。
  * 開発者はターミナルでの検証(.ask)と、自社システムへの組み込み(.query)を両立できます。
  */
-
 class ContinuumClient {
   /**
-   * @param {string} endpointUrl - 発行されたAPIエンドポイントURL (Cloud Functions)
-   * @param {string} apiKey - $60で購入した専用のプリペイドAPIキー
+   * @param {string} endpointUrl - 決済後に発行された専用APIエンドポイントURL
+   * @param {string} continuumToken - $60で購入した専用アクセス資格 (Continuum Token)
    * @param {string} docId - (任意) 会話履歴の外部冷却（同期）先となるGoogle Docs ID
    */
-  constructor(endpointUrl, apiKey, docId = null) {
+  constructor(endpointUrl, continuumToken, docId = null) {
     this.endpointUrl = endpointUrl;
-    this.apiKey = apiKey;
+    this.continuumToken = continuumToken; // 変数名を統一
     this.docId = docId;
     this.sessionId = `session_${Date.now()}`;
   }
@@ -26,12 +25,11 @@ class ContinuumClient {
    * @param {string} message - 送信するテキスト
    */
   async ask(message) {
-    if (!this.apiKey) {
-      console.error("🚨 エラー: APIキーが設定されていません。");
+    if (!this.continuumToken) {
+      console.error("🚨 エラー: Continuum Tokenが設定されていません。");
       return;
     }
     
-    // ターミナル上で動くスピナー表示（重厚な推論中のUX向上）
     process.stdout.write("\n⏳ ASI-OPEX Engine 推論および原価パージ実行中...");
     const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
     let i = 0;
@@ -45,7 +43,8 @@ class ContinuumClient {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": this.apiKey
+          // ※ソースコード上はシステム要件としてヘッダー名を指定
+          "x-api-key": this.continuumToken 
         },
         body: JSON.stringify({
           message: message,
@@ -73,20 +72,17 @@ class ContinuumClient {
   /**
    * 【システム組み込み専用メソッド】
    * AIへメッセージを送信し、純粋なレスポンスデータ（JSON）を返します。
-   * ターミナルへのUI描画を行わないため、自社の別アプリケーションへの統合に最適です。
-   * @param {string} message - 送信するテキスト
-   * @returns {Promise<Object>} AIの回答、参考URL、FinOpsレポートを含むオブジェクト
    */
   async query(message) {
-    if (!this.apiKey) {
-      throw new Error("🚨 エラー: APIキーが設定されていません。");
+    if (!this.continuumToken) {
+      throw new Error("🚨 エラー: Continuum Tokenが設定されていません。");
     }
 
     const response = await fetch(this.endpointUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": this.apiKey
+        "x-api-key": this.continuumToken
       },
       body: JSON.stringify({
         message: message,
@@ -127,7 +123,6 @@ class ContinuumClient {
       console.log(`📝 【同期完了】 記憶の外部冷却としてGoogle Docsへ履歴を退避しました。`);
       console.log("--------------------------------------------------");
     }
-
     if (finops_report && finops_report.breakdown) {
       const br = finops_report.breakdown;
       console.log("🔍 【トークンの歪み・原価可視化レポート】");
@@ -142,7 +137,8 @@ class ContinuumClient {
       console.log("==================================================");
     }
     
-    console.log(`💳 APIキー残弾: 残り ${remaining_requests} 回`);
+    // 表示をContinuum Tokenの残弾に変更
+    console.log(`💳 Continuum Token 残弾: 残り ${remaining_requests} 回`);
     console.log("==================================================\n");
   }
 }
