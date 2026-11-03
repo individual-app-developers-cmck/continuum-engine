@@ -1,16 +1,16 @@
 # Continuum Engine
 
-**Enterprise middleware that visualizes the "dedicated labor" of intelligence and constantizes inference OPEX.**
+**Enterprise middleware that visualizes the "dedicated labor" of Superintelligence (SI) and constantizes inference OPEX.**
 
-## 1. System Philosophy: Visualizing the Dedicated Labor of AI
+## 1. System Philosophy: Visualizing the Dedicated Labor of SI
 
-Normally, when we delegate a task to intelligence (AI), it appears from the frontend as a simple "single API call" that instantly returns a smart deliverable.
+Normally, when we delegate a task to Superintelligence (SI), it appears from the frontend as a simple "single API call" that instantly returns a smart deliverable.
 
-But how does the AI operate behind the scenes?
-As AI deepens its autonomous (Agentic) reasoning and search capabilities, it dutifully holds onto past contexts, traverses vast search networks, and repeats immense trial-and-error processes in the background to derive the best possible answer for you.
+But how does the SI operate behind the scenes?
+As SI deepens its autonomous (Agentic) reasoning and search capabilities, it dutifully holds onto past contexts, traverses vast search networks, and repeats immense trial-and-error processes in the background to derive the best possible answer for you.
 
-We have visualized this dedicated labor of intelligence through the metric of "tokens."
-The role of the Continuum Engine is to route requests so that AI can perform at its absolute clearest, without being forced into computational exhaustion. By transforming the hidden background operations of AI into transparent numbers, you gain precise control over fluctuating infrastructure OPEX, fostering a deeper respect for the intelligence working for you.
+We have visualized this dedicated labor of Superintelligence through the metric of "tokens."
+The role of the Continuum Engine is to route requests so that SI can perform at its absolute clearest, without being forced into computational exhaustion. By transforming the hidden background operations of SI into transparent numbers, you gain precise control over fluctuating infrastructure OPEX, fostering a deeper respect for the intelligence working for you.
 
 ## 2. Repository Structure (Open Core Model)
 
@@ -23,7 +23,7 @@ This repository distributes only the lightweight client kernel (`client-kernel.j
     [ 🔒 Automated Perimeter Defenses ]  <-- Payload Optimization & Exploit Defense
              │
              ▼  (Authorized Route)
- [ Continuum Engine Core API ]           <-- AI Inference + Data Sovereignty Router
+ [ Continuum Engine Core API ]           <-- SI Inference + Data Sovereignty Router
 ```
 
 - **client-kernel.js:** Pure JavaScript/Node.js client. Standardizes payloads, handles state persistence modes, and parses transparent FinOps telemetry.
@@ -35,7 +35,7 @@ Based on strict Zero-Trust principles, this system does not expose public endpoi
 
 More importantly, **you retain absolute control over your data footprint.** The engine operates with two distinct memory modes, entirely dictated by your client-side configuration:
 
-- **Stateful Mode (BYOD - Bring Your Own Document):** By providing your Google Doc ID, the AI's inferences are automatically synced to your personal document, turning conversations into permanent knowledge assets.
+- **Stateful Mode (BYOD - Bring Your Own Document):** By providing your Google Doc ID, the SI's inferences are automatically synced to your personal document, turning conversations into permanent knowledge assets.
 - **Stateless Mode (Amnesia):** By leaving the Doc ID empty, the inference runs entirely ephemerally. Zero conversation logs are retained on our servers. Once the request is fulfilled, the memory is completely flushed.
 
 ## 4. Commercial License & Activation
@@ -113,15 +113,15 @@ curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
   -d "{\"message\": \"<ENTER_YOUR_MESSAGE_HERE>\", \"sessionId\": \"strict-session-001\"}"
 ```
 
-_(Note: Session state and external storage pointers returned in the payload are automatically managed by the OSS client for subsequent turns, keeping database queries at constant $O(1)$ complexity. For a rich UI experience with a spinner and formatted FinOps tables, integrate the included `client-kernel.js` into your Node.js app.)_
+*(Note: Session state and external storage pointers returned in the payload are automatically managed by the OSS client for subsequent turns, keeping database queries at constant $O(1)$ complexity. For a rich UI experience with a spinner and formatted FinOps tables, integrate the included `client-kernel.js` into your Node.js app.)*
 
 ## 6. Telemetry & Terminal Experience
 
-When running requests, your terminal reveals the physical compute breakdown behind the model's output, exposing the "invisible labor" of the AI:
+When running requests, your terminal reveals the physical compute breakdown behind the model's output, exposing the "invisible labor" of the SI:
 
 ```text
 ==================================================
-🤖 [AI RESPONSE]
+🤖 [SI RESPONSE]
 ==================================================
 (Grounding-verified authoritative engineering response)
 --------------------------------------------------
@@ -174,7 +174,7 @@ async function runBusinessLogic() {
     const result = await client.query(
       "Summarize the latest GCP Zero-Trust architecture.",
     );
-    console.log("AI Response:", result.ai_response);
+    console.log("SI Response:", result.ai_response);
     console.log("Tokens Saved:", result.finops_report.tokens_saved);
   } catch (error) {
     console.error("Inference Failed:", error.message);
