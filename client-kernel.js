@@ -3,38 +3,38 @@
  * ============================================================================
  * Continuum Engine - OSS Client Kernel (client-kernel.js)
  * ============================================================================
- * 目的: ASI-OPEX Engineの専用APIを安全かつ簡単に呼び出すためのミドルウェア。
- * 開発者はターミナルでの検証(.ask)と、自社システムへの組み込み(.query)を両立できます。
+ * Purpose: Middleware for safely and easily invoking the ASI-OPEX Engine's dedicated API.
+ * Developers can validate in the terminal (.ask) and integrate into their own systems (.query).
  */
 class ContinuumClient {
   /**
-   * @param {string} endpointUrl - 決済後に発行された専用APIエンドポイントURL
-   * @param {string} authHeaderName - 決済後に指定される専用ヘッダー名 (Zero-Trust対応)
-   * @param {string} continuumToken - $60で購入した専用アクセス資格 (Continuum Token)
-   * @param {string} docId - (任意) 会話履歴の外部冷却（同期）先となるGoogle Docs ID
+   * @param {string} endpointUrl - Dedicated API endpoint URL issued post-purchase
+   * @param {string} authHeaderName - Dedicated header name specified post-purchase (Zero-Trust)
+   * @param {string} continuumToken - Dedicated access credential purchased for $60 (Continuum Token)
+   * @param {string} docId - (Optional) Google Docs ID for external cooling (sync) of conversation history
    */
   constructor(endpointUrl, authHeaderName, continuumToken, docId = null) {
     this.endpointUrl = endpointUrl;
-    this.authHeaderName = authHeaderName; // ▼ 変更: ヘッダー名も外部から注入させる
+    this.authHeaderName = authHeaderName;
     this.continuumToken = continuumToken;
     this.docId = docId;
     this.sessionId = `session_${Date.now()}`;
   }
 
   /**
-   * 【デモ・ターミナル検証用メソッド】
+   * [Terminal Validation Method]
    */
   async ask(message) {
     if (!this.continuumToken || !this.authHeaderName) {
-      console.error("🚨 エラー: アクセス資格またはヘッダー名が設定されていません。");
+      console.error("🚨 Error: Access credentials or header name are not configured.");
       return;
     }
     
-    process.stdout.write("\n⏳ ASI-OPEX Engine 推論および原価パージ実行中...");
+    process.stdout.write("\n⏳ ASI-OPEX Engine: Executing inference & cost purge...");
     const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
     let i = 0;
     const interval = setInterval(() => {
-      process.stdout.write(`\r⏳ ASI-OPEX Engine 推論および原価パージ実行中... ${spinner[i]} `);
+      process.stdout.write(`\r⏳ ASI-OPEX Engine: Executing inference & cost purge... ${spinner[i]} `);
       i = (i + 1) % spinner.length;
     }, 100);
 
@@ -43,7 +43,7 @@ class ContinuumClient {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          [this.authHeaderName]: this.continuumToken // ▼ 変更: 動的プロパティ名でヘッダーをセット（直書き排除）
+          [this.authHeaderName]: this.continuumToken
         },
         body: JSON.stringify({
           message: message,
@@ -53,34 +53,33 @@ class ContinuumClient {
       });
       
       clearInterval(interval);
-      process.stdout.write("\r✅ 推論およびセキュリティ検閲完了！                                  \n");
+      process.stdout.write("\r✅ Inference & Security Audit Completed!                                  \n");
       
       const data = await response.json();
       if (!response.ok) {
-        console.error(`\n❌ APIエラー (${response.status}): ${data.error || "不明なエラー"}`);
+        console.error(`\n❌ API Error (${response.status}): ${data.error || "Unknown Error"}`);
         return;
       }
       
       this._renderResponse(data);
     } catch (error) {
       clearInterval(interval);
-      console.error("\n❌ ネットワーク通信エラー:", error.message);
+      console.error("\n❌ Network Communication Error:", error.message);
     }
   }
 
   /**
-   * 【システム組み込み専用メソッド】
+   * [System Integration Method]
    */
   async query(message) {
     if (!this.continuumToken || !this.authHeaderName) {
-      throw new Error("🚨 エラー: アクセス資格またはヘッダー名が設定されていません。");
+      throw new Error("🚨 Error: Access credentials or header name are not configured.");
     }
-
     const response = await fetch(this.endpointUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        [this.authHeaderName]: this.continuumToken // ▼ 変更: 動的プロパティ名でヘッダーをセット
+        [this.authHeaderName]: this.continuumToken
       },
       body: JSON.stringify({
         message: message,
@@ -91,26 +90,26 @@ class ContinuumClient {
     
     const data = await response.json();
     if (!response.ok) {
-      throw new Error(`APIエラー (${response.status}): ${data.error || "不明なエラー"}`);
+      throw new Error(`API Error (${response.status}): ${data.error || "Unknown Error"}`);
     }
     
     return data;
   }
 
   /**
-   * 内部メソッド: レスポンスデータのターミナル可視化ロジック
+   * Internal Method: Terminal visualization logic for response data
    */
   _renderResponse(data) {
     const { ai_response, source_urls, remaining_requests, finops_report, doc_id } = data;
     
     console.log("\n==================================================");
-    console.log("🤖 【AI 応答】");
+    console.log("🤖 [AI RESPONSE]");
     console.log("==================================================");
     console.log(ai_response);
     console.log("--------------------------------------------------");
     
     if (source_urls && source_urls.length > 0) {
-      console.log("🔗 【参考リンク（エンタープライズ品質検閲済）】");
+      console.log("🔗 [VERIFIED PRIMARY SOURCES]");
       source_urls.forEach((src, idx) => {
         console.log(`  ${idx + 1}. ${src.title}\n     ${src.uri}`);
       });
@@ -118,27 +117,28 @@ class ContinuumClient {
     }
     
     if (doc_id) {
-      console.log(`📝 【同期完了】 記憶の外部冷却としてGoogle Docsへ履歴を退避しました。`);
+      console.log(`📝 [STATE STORAGE] History successfully synced to your private document.`);
       console.log("--------------------------------------------------");
     }
+
     if (finops_report && finops_report.breakdown) {
       const br = finops_report.breakdown;
-      console.log("🔍 【トークンの歪み・原価可視化レポート】");
-      console.log(`  ├─ T_input (最適化済入力) : ${br.t_input_optimized} トークン`);
-      console.log(`  ├─ T_grounding (隠れ原価) : ${br.t_grounding_dynamic} トークン`);
-      console.log(`  └─ T_output (生成結果)    : ${br.t_output_generated} トークン`);
+      console.log("🔍 [FINOPS TELEMETRY BREAKDOWN]");
+      console.log(`  ├─ T_input (Optimized Prompt)     : ${br.t_input_optimized} tokens`);
+      console.log(`  ├─ T_grounding (Dynamic Search)   : ${br.t_grounding_dynamic} tokens`);
+      console.log(`  └─ T_output (Generated Result)    : ${br.t_output_generated} tokens`);
       
       if (finops_report.tokens_saved > 0) {
-        console.log(`  🛡️ エッジ物理遮断 (節約)  : ${finops_report.tokens_saved} トークン`);
+        console.log(`  🛡️ Edge Purge (Tokens Prevented)  : ${finops_report.tokens_saved} tokens`);
       }
-      console.log(`  📉 実際のAPI課金対象      : ${finops_report.billed_tokens} トークン`);
+      console.log(`  📉 Net Billed Consumption         : ${finops_report.billed_tokens} tokens`);
       console.log("==================================================");
     }
     
-    console.log(`💳 Continuum Token 残弾: 残り ${remaining_requests} 回`);
+    console.log(`💳 Quota Balance: ${remaining_requests} requests remaining`);
     console.log("==================================================\n");
   }
 }
 
-// Node.jsモジュールとしてエクスポート
+// Export as Node.js module
 module.exports = ContinuumClient;
