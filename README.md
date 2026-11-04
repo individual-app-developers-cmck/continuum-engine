@@ -54,6 +54,19 @@ _Protected by Stripe Checkout & Zero-Trust Origin Verification_
 2. **Deterministic Redirect:** Upon verified checkout, you are redirected immediately to the private setup console (`setup.html`) with your transaction-bound session proof.
 3. **Provisioning:** Retrieve your private endpoint (`<YOUR_PROVISIONED_ENDPOINT>`), your dedicated API key (`<YOUR_PROVISIONED_AUTH_TOKEN>`), and the **hidden authentication header name**.
 
+## 4.5. Installation
+
+Install the lightweight client kernel via your preferred package manager.
+
+**Node.js (npm):**
+```bash
+npm install continuum-engine-client
+
+Python (pip): (Note: Python wrapper is coming soon. The current kernel is Node.js only.)
+
+# pip install continuum-engine-client
+
+
 ## 5. Baseline measurement and edge-layer optimization
 
 You can instantly verify the cost-compression logic from your terminal. Replace the placeholders with the exact credentials and hidden protocol headers obtained from your setup console, and enter your prompt in `<ENTER_YOUR_MESSAGE_HERE>`.
