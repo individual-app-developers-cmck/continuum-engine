@@ -14,11 +14,11 @@ The role of the Continuum Engine is to route requests so that SI can perform at 
 
 ## 2. Repository Structure (Open Core Model)
 
-This repository distributes only the lightweight client kernel (`client-kernel.js`) under an open-source model.
+This repository distributes only the lightweight client kernel (`client_kernel.py` / `client-kernel.js`) under an open-source model.
 
 ```text
-[ Your Application / Terminal ]
-             │  (client-kernel.js)
+[ Your Application / BFF / Terminal ]
+             │  (client_kernel.py / .js)
              ▼
     [ 🔒 Automated Perimeter Defenses ]  <-- Payload Optimization & Exploit Defense
              │
@@ -26,7 +26,7 @@ This repository distributes only the lightweight client kernel (`client-kernel.j
  [ Continuum Engine Core API ]           <-- SI Inference + Data Sovereignty Router
 ```
 
-- **client-kernel.js:** Pure JavaScript/Node.js client. Standardizes payloads, handles state persistence modes, and parses transparent FinOps telemetry.
+- **client_kernel.py / .js:** Pure Python/Node.js clients. Standardizes payloads, handles state persistence modes, and parses transparent FinOps telemetry.
 - **Core API Engine (Cloud Backend):** Closed intellectual property. Enforces hardware-level quotas, sanitizes search results, and manages data sovereignty (Docs cooling or complete amnesia).
 
 ## 3. Integration & Data Sovereignty (The Power of Choice)
@@ -36,7 +36,7 @@ Based on strict Zero-Trust principles, this system does not expose public endpoi
 More importantly, **you retain absolute control over your data footprint.** The engine operates with two distinct memory modes, entirely dictated by your client-side configuration:
 
 - **Stateful Mode (BYOD - Bring Your Own Document):** By providing your Google Doc ID, the SI's inferences are automatically synced to your personal document, turning conversations into permanent knowledge assets.
-- **Stateless Mode (Amnesia):** By leaving the Doc ID empty, the inference runs entirely ephemerally. Zero conversation logs are retained on our servers. Once the request is fulfilled, the memory is completely flushed.
+- **Stateless Mode (Amnesia):** By leaving the Doc ID empty, the inference runs entirely ephemerally. Zero conversation logs are retained on our servers. Once the request is fulfilled, the memory is completely flushed after a 7-day TTL pointer expiration.
 
 ## 4. Commercial License & Activation
 
@@ -54,20 +54,21 @@ _Protected by Stripe Checkout & Zero-Trust Origin Verification_
 2. **Deterministic Redirect:** Upon verified checkout, you are redirected immediately to the private setup console (`setup.html`) with your transaction-bound session proof.
 3. **Provisioning:** Retrieve your private endpoint (`<YOUR_PROVISIONED_ENDPOINT>`), your dedicated API key (`<YOUR_PROVISIONED_AUTH_TOKEN>`), and the **hidden authentication header name**.
 
-## 4.5. Installation
+## 5. Installation (Package Managers)
 
-Install the lightweight client kernel via your preferred package manager.
+Install the lightweight client kernel via your preferred package manager to easily integrate it into your terminal scripts or BFF (Backend For Frontend).
 
 **Node.js (npm):**
 ```bash
 npm install continuum-engine-client
+```
 
-Python (pip): (Note: Python wrapper is coming soon. The current kernel is Node.js only.)
+**Python (pip):**
+```bash
+pip install continuum-engine-client
+```
 
-# pip install continuum-engine-client
-
-
-## 5. Baseline measurement and edge-layer optimization
+## 6. Baseline measurement and edge-layer optimization (CLI)
 
 You can instantly verify the cost-compression logic from your terminal. Replace the placeholders with the exact credentials and hidden protocol headers obtained from your setup console, and enter your prompt in `<ENTER_YOUR_MESSAGE_HERE>`.
 
@@ -128,9 +129,62 @@ curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
 
 *(Note: Session state and external storage pointers returned in the payload are automatically managed by the OSS client for subsequent turns, keeping database queries at constant $O(1)$ complexity. For a rich UI experience with a spinner and formatted FinOps tables, integrate the included `client-kernel.js` into your Node.js app.)*
 
-## 6. Telemetry & Terminal Experience
+## 7. BFF Integration (Backend For Frontend)
 
-When running requests, your terminal reveals the physical compute breakdown behind the model's output, exposing the "invisible labor" of the SI:
+To integrate the engine securely into your own server-side application (protecting your $60 API key from client-side exposure), require the installed kernel and instantiate it with your provisioned credentials.
+
+### Node.js (Express) Example
+
+```javascript
+// Keep your credentials secure in your .env file
+const ContinuumClient = require("continuum-engine-client");
+
+const client = new ContinuumClient(
+  process.env.CONTINUUM_ENDPOINT,
+  process.env.CONTINUUM_HEADER_NAME,
+  process.env.CONTINUUM_TOKEN,
+  process.env.GOOGLE_DOC_ID // Optional: For Stateful BYOD mode
+);
+
+async function handleUserRequest(userMessage) {
+  try {
+    // .query() returns raw JSON telemetry without terminal UI blocking
+    const result = await client.query(userMessage);
+    console.log("Tokens Saved:", result.finops_report.tokens_saved);
+    return result.ai_response;
+  } catch (error) {
+    console.error("Inference Failed:", error.message);
+  }
+}
+```
+
+### Python (FastAPI / Flask) Example
+
+```python
+# Keep your credentials secure in your environment variables
+import os
+from continuum_engine import ContinuumClient
+
+client = ContinuumClient(
+    endpoint_url=os.getenv("CONTINUUM_ENDPOINT"),
+    auth_header_name=os.getenv("CONTINUUM_HEADER_NAME"),
+    continuum_token=os.getenv("CONTINUUM_TOKEN"),
+    doc_id=os.getenv("GOOGLE_DOC_ID") # Optional
+)
+
+def handle_user_request(user_message: str):
+    try:
+        # .query() returns a dictionary telemetry payload
+        result = client.query(user_message)
+        print(f"Tokens Saved: {result.get('finops_report', {}).get('tokens_saved')}")
+        return result.get("ai_response")
+    except Exception as e:
+        print(f"Inference Failed: {e}")
+```
+
+## 8. Telemetry & Terminal Experience
+
+When running requests directly via the `.ask()` method in your terminal, the client kernel reveals the physical compute breakdown behind the model's output, exposing the "invisible labor" of the SI:
 
 ```text
 ==================================================
@@ -155,7 +209,7 @@ When running requests, your terminal reveals the physical compute breakdown behi
 ==================================================
 ```
 
-## 7. Operational Policies (Read Before Use)
+## 9. Operational Policies (Read Before Use)
 
 To guarantee microsecond-level latency and protect the ecosystem for all verified users, automated perimeter defenses enforce strict, non-negotiable request policies. **Users who fail to comply with the specifications below risk immediate rejection or non-refundable credential revocation:**
 
@@ -164,35 +218,3 @@ To guarantee microsecond-level latency and protect the ecosystem for all verifie
 - **Strict Quota Termination:** The 800-request quota is hard-capped to safeguard against autonomous loop runaways. Once depleted, a new license acquisition is required.
 - **International Use Only:** Transactions originating from Japanese domestic payment networks or IP ranges are automatically rejected at the gateway level due to local tax operational constraints.
 - **Strict Zero-Support Policy:** This open-core distribution is engineered solely for experienced engineers. We provide no interactive debugging, manual onboarding, or post-revocation appeals.
-
-## 8. Backend Integration (Node.js)
-
-To integrate the engine into your own server-side application (BFF), require the included kernel and instantiate it with your provisioned credentials.
-
-```javascript
-// Example: Integrating into your own Node.js backend
-const ContinuumClient = require("./client-kernel.js");
-
-// Initialize with your provisioned credentials (keep these in .env)
-const client = new ContinuumClient(
-  process.env.CONTINUUM_ENDPOINT,
-  process.env.CONTINUUM_HEADER_NAME,
-  process.env.CONTINUUM_TOKEN,
-  process.env.GOOGLE_DOC_ID, // Optional: For Stateful BYOD mode
-);
-
-async function runBusinessLogic() {
-  try {
-    // .query() returns raw JSON telemetry without terminal UI blocking
-    const result = await client.query(
-      "Summarize the latest GCP Zero-Trust architecture.",
-    );
-    console.log("SI Response:", result.ai_response);
-    console.log("Tokens Saved:", result.finops_report.tokens_saved);
-  } catch (error) {
-    console.error("Inference Failed:", error.message);
-  }
-}
-
-runBusinessLogic();
-```
