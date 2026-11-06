@@ -1,6 +1,6 @@
 # Continuum Engine
 
-**Enterprise middleware designed to visualize the "dedicated labor" of Superintelligence (SI) and bring transparency to inference operations.**
+**Enterprise middleware aimed at visualizing the "dedicated labor" of Superintelligence (SI) and bringing complete transparency to inference operations.**
 
 ## 1. System Philosophy: Visualizing the Dedicated Labor of SI
 
@@ -16,7 +16,7 @@ The role of the Continuum Engine is to route requests so that SI can perform at 
 
 This repository distributes only the lightweight client kernel (`client_kernel.py` / `client-kernel.js`) under an open-source model.
 
-```
+```text
 [ Your Application / BFF / Terminal ]
              │  (client_kernel.py / .js)
              ▼
@@ -24,12 +24,10 @@ This repository distributes only the lightweight client kernel (`client_kernel.p
              │
              ▼  (Authorized Route)
  [ Continuum Engine Core API ]           <-- SI Inference + Data Sovereignty Router
-
 ```
 
-* **client_kernel.py / .js:** Pure Python/Node.js clients. Standardizes payloads, handles state persistence modes, and parses transparent FinOps telemetry.
-
-* **Core API Engine (Cloud Backend):** Closed intellectual property. Enforces hardware-level quotas, sanitizes search results, and manages data sovereignty (Docs cooling or complete amnesia).
+- **client_kernel.py / .js:** Pure Python/Node.js clients. Standardizes payloads, handles state persistence modes, and parses transparent FinOps telemetry.
+- **Core API Engine (Cloud Backend):** Closed intellectual property. Enforces hardware-level quotas, sanitizes search results, and manages data sovereignty (Docs cooling or complete amnesia).
 
 ## 3. Integration & Data Sovereignty (The Power of Choice)
 
@@ -37,26 +35,23 @@ Based on strict Zero-Trust principles, this system does not expose public endpoi
 
 More importantly, **you retain absolute control over your data footprint.** The engine operates with two distinct memory modes, entirely dictated by your client-side configuration:
 
-* **Stateful Mode (BYOD - Bring Your Own Document):** By providing your Google Doc ID, the SI's inferences are automatically synced to your personal document, turning conversations into permanent knowledge assets.
-
-* **Stateless Mode (Amnesia):** By leaving the Doc ID empty, the inference runs entirely ephemerally. Zero conversation logs are retained on our servers. Once the request is fulfilled, the memory is completely flushed after a 7-day TTL pointer expiration.
+- **Stateful Mode (BYOD - Bring Your Own Document):** By providing your Google Doc ID, the SI's inferences are automatically synced to your personal document, turning conversations into permanent knowledge assets.
+- **Stateless Mode (Amnesia):** By leaving the Doc ID empty, the inference runs entirely ephemerally. Zero conversation logs are retained on our servers. Once the request is fulfilled, the memory is completely flushed after a 7-day TTL pointer expiration.
 
 ## 4. Commercial License & Activation
 
-Production access rights are provisioned exclusively as a one-time infrastructure acquisition (**\$60.00 USD / 800-Request hard cap**). There are no recurring subscriptions or surprise overages.
+Production access rights are provisioned exclusively as a one-time infrastructure acquisition (**$60.00 USD / 800-Request hard cap**). There are no recurring subscriptions or surprise overages.
 
 To shield our infrastructure, credentials are issued solely via our verified checkout gate:
 
-[![Stripe Checkout](https://img.shields.io/badge/Stripe%20Checkout-Activate%20Private%20Engine%20(%2460)-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/test_28E7sKgOGe3Z3n66ec6oo00)
+[![Stripe Checkout](https://img.shields.io/badge/Stripe%20Checkout-Activate%20Private%20Engine%20%28%2460%29-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/test_28E7sKgOGe3Z3n66ec6oo00)
 
 *Protected by Stripe Checkout & Zero-Trust Origin Verification*
 
 ### Authorization Steps
 
-1. **Authorize:** Complete the one-time \$60 license acquisition via the activation badge above.
-
+1. **Authorize:** Complete the one-time $60 license acquisition via the activation badge above.
 2. **Deterministic Redirect:** Upon verified checkout, you are redirected immediately to the private setup console (`setup.html`) with your transaction-bound session proof.
-
 3. **Provisioning:** Retrieve your private endpoint (`<YOUR_PROVISIONED_ENDPOINT>`), your dedicated API key (`<YOUR_PROVISIONED_AUTH_TOKEN>`), and the **hidden authentication header name**.
 
 ## 5. Verification & Single-File Validation (Package Managers)
@@ -64,17 +59,12 @@ To shield our infrastructure, credentials are issued solely via our verified che
 Once package installation is completed, **you must create a single script file in your local workspace** to execute the client kernel.
 
 ### Node.js (npm)
-
 1. Install package:
-
-   ```
+   ```bash
    npm install continuum-engine-client
-   
    ```
-
 2. Create `run.js`:
-
-   ```
+   ```javascript
    const ContinuumClient = require("continuum-engine-client");
    const client = new ContinuumClient(
      "<YOUR_PROVISIONED_ENDPOINT>",
@@ -82,23 +72,16 @@ Once package installation is completed, **you must create a single script file i
      "<YOUR_PROVISIONED_TOKEN>"
    );
    client.ask("Summarize the latest GCP Zero-Trust architecture in 3 bullet points.");
-   
    ```
-
 3. Run: `node run.js`
 
 ### Python (pip)
-
 1. Install package:
-
-   ```
+   ```bash
    pip install continuum-engine-client
-   
    ```
-
 2. Create `run.py`:
-
-   ```
+   ```python
    from continuum_engine_client.client_kernel import ContinuumClient
    client = ContinuumClient(
        endpoint_url="<YOUR_PROVISIONED_ENDPOINT>",
@@ -106,9 +89,7 @@ Once package installation is completed, **you must create a single script file i
        continuum_token="<YOUR_PROVISIONED_TOKEN>"
    )
    client.ask("Summarize the latest GCP Zero-Trust architecture in 3 bullet points.")
-   
    ```
-
 3. Run: `python run.py`
 
 ## 6. Zero-Dependency Baseline Probe (CLI)
@@ -117,7 +98,7 @@ Validate your credentials directly via terminal before writing application code.
 
 ### For Mac / Linux (Bash)
 
-```
+```bash
 # [WARNING] All requests are inspected by Gate 0 Edge Interceptor.
 # Malicious payloads or protocol guessing will trigger immediate token revocation.
 
@@ -131,12 +112,11 @@ curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" \
     "message": "<ENTER_YOUR_MESSAGE_HERE>",
     "sessionId": "strict-session-001"
   }'
-
 ```
 
 ### For Windows (PowerShell)
 
-```
+```powershell
 # [WARNING] Edge Interceptor is active. Unrecognized User-Agents or
 # malicious injection attempts will permanently revoke your $60 token.
 
@@ -155,12 +135,11 @@ Invoke-RestMethod -Uri "<YOUR_PROVISIONED_ENDPOINT>" `
   } `
   -Body $body `
   -TimeoutSec 180
-
 ```
 
 ### For Windows (CMD)
 
-```
+```cmd
 REM [WARNING] Zero-Trust Gate 0 is active. Payload anomaly detection enabled.
 
 curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
@@ -170,18 +149,17 @@ curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
   -H "x-client-trace-context: req-%RANDOM%" ^
   -H "User-Agent: Continuum-Enterprise-Client/1.0" ^
   -d "{\"message\": \"<ENTER_YOUR_MESSAGE_HERE>\", \"sessionId\": \"strict-session-001\"}"
-
 ```
 
-*(Note: Session state and external storage pointers returned in the payload are automatically managed by the OSS client for subsequent turns, keeping database queries at constant* $O(1)$ *complexity. For a rich UI experience with a spinner and formatted FinOps tables, integrate the included `client-kernel.js` into your Node.js app.)*
+*(Note: Session state and external storage pointers returned in the payload are automatically managed by the OSS client for subsequent turns, keeping database queries at constant $O(1)$ complexity. For a rich UI experience with a spinner and formatted FinOps tables, integrate the included `client-kernel.js` into your Node.js app.)*
 
 ## 7. Enterprise BFF Integration (Backend For Frontend)
 
-To integrate the engine securely into your own server-side application (protecting your \$60 API key from client-side exposure), require the installed kernel and instantiate it with your provisioned credentials.
+To integrate the engine securely into your own server-side application (protecting your $60 API key from client-side exposure), require the installed kernel and instantiate it with your provisioned credentials.
 
 ### Node.js (Express) Example
 
-```
+```javascript
 // Keep your credentials secure in your .env file
 const ContinuumClient = require("continuum-engine-client");
 
@@ -202,12 +180,11 @@ async function handleUserRequest(userMessage) {
     console.error("Inference Failed:", error.message);
   }
 }
-
 ```
 
 ### Python (FastAPI / Flask) Example
 
-```
+```python
 # Keep your credentials secure in your environment variables
 import os
 from continuum_engine_client.client_kernel import ContinuumClient
@@ -227,14 +204,13 @@ def handle_user_request(user_message: str):
         return result.get("ai_response")
     except Exception as e:
         print(f"Inference Failed: {e}")
-
 ```
 
 ## 8. Telemetry & Terminal Experience
 
 When running requests directly via the `.ask()` method in your terminal, the client kernel reveals the physical compute breakdown behind the model's output, exposing the "invisible labor" of the SI:
 
-```
+```text
 ==================================================
 🤖 [SI RESPONSE]
 ==================================================
@@ -255,23 +231,16 @@ When running requests directly via the `.ask()` method in your terminal, the cli
 ==================================================
 💳 Quota Balance: 799 requests remaining
 ==================================================
-
 ```
 
 ## 9. Operational Policies (Read Before Use)
 
 To guarantee microsecond-level edge response and enforce strict FinOps predictability, the gateway applies non-negotiable operational controls:
 
-* **180s Circuit Breaker & Prompt Specificity:** The engine dynamically executes recursive search grounding against official documentation. To prevent cost runaways and infinite search loops, **a strict 180-second hard execution limit (circuit breaker)** is enforced:
-
-  * **Optimized Prompts (5–20s SLA):** Scoped architectural questions, RFC/standard lookups, error investigations, and deterministic code specifications.
-
-  * **Hard Timeout (180s Max):** Abstract, open-ended, or philosophical queries force multi-hop grounding depths. Invocations exceeding 180 seconds are forcefully terminated with HTTP 504. Formulate concrete, well-scoped prompts.
-
-* **Service Availability (Geographic Scope):** This middleware, client kernel, and associated API keys are exclusively intended for global enterprise environments and are **strictly not available for use or purchase within Japan**. Access from restricted jurisdictions is filtered at the gateway level.
-
-* **Zero-Tolerance Exploit Defense:** Automated vulnerability scans or prompt injection payloads are blocked at Gate 0. Associated credentials will be revoked immediately (403 Access Denied) without refund.
-
-* **Strict Quota Cap:** The 800-request quota is hard-capped to safeguard against autonomous loop runaways. Once depleted, a new license acquisition is required.
-
-* **Zero-Support Policy:** Engineered exclusively for experienced systems engineers. We provide no interactive debugging, manual onboarding, or post-revocation appeals.
+- **180s Circuit Breaker & Prompt Specificity:** The engine dynamically executes recursive search grounding against official documentation. To prevent cost runaways and infinite search loops, **a strict 180-second hard execution limit (circuit breaker)** is enforced:
+  - **Optimized Prompts (5–20s SLA):** Scoped architectural questions, RFC/standard lookups, error investigations, and deterministic code specifications.
+  - **Hard Timeout (180s Max):** Abstract, open-ended, or philosophical queries force multi-hop grounding depths. Invocations exceeding 180 seconds are forcefully terminated with HTTP 504. Formulate concrete, well-scoped prompts.
+- **Service Availability (Geographic Scope):** This middleware, client kernel, and associated API keys are exclusively intended for global enterprise environments and are **strictly not available for use or purchase within Japan**. Access from restricted jurisdictions is filtered at the gateway level.
+- **Zero-Tolerance Exploit Defense:** Automated vulnerability scans or prompt injection payloads are blocked at Gate 0. Associated credentials will be revoked immediately (403 Access Denied) without refund.
+- **Strict Quota Cap:** The 800-request quota is hard-capped to safeguard against autonomous loop runaways. Once depleted, a new license acquisition is required.
+- **Zero-Support Policy:** Engineered exclusively for experienced systems engineers. We provide no interactive debugging, manual onboarding, or post-revocation appeals.
