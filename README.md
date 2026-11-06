@@ -54,23 +54,47 @@ _Protected by Stripe Checkout & Zero-Trust Origin Verification_
 2. **Deterministic Redirect:** Upon verified checkout, you are redirected immediately to the private setup console (`setup.html`) with your transaction-bound session proof.
 3. **Provisioning:** Retrieve your private endpoint (`<YOUR_PROVISIONED_ENDPOINT>`), your dedicated API key (`<YOUR_PROVISIONED_AUTH_TOKEN>`), and the **hidden authentication header name**.
 
-## 5. Installation (Package Managers)
+## 5. Verification & Single-File Validation (Package Managers)
 
-Install the lightweight client kernel via your preferred package manager to easily integrate it into your terminal scripts or BFF (Backend For Frontend).
+Once package installation is completed, **you must create a single script file in your local workspace** to execute the client kernel.
 
-**Node.js (npm):**
-```bash
-npm install continuum-engine-client
-```
+### Node.js (npm)
+1. Install package:
+   ```bash
+   npm install continuum-engine-client
+   ```
+2. Create `run.js`:
+   ```javascript
+   const ContinuumClient = require("continuum-engine-client");
+   const client = new ContinuumClient(
+     "<YOUR_PROVISIONED_ENDPOINT>",
+     "<HEADER_REVEALED_POST_PURCHASE>",
+     "<YOUR_PROVISIONED_TOKEN>"
+   );
+   client.ask("Summarize the latest GCP Zero-Trust architecture in 3 bullet points.");
+   ```
+3. Run: `node run.js`
 
-**Python (pip):**
-```bash
-pip install continuum-engine-client
-```
+### Python (pip)
+1. Install package:
+   ```bash
+   pip install continuum-engine-client
+   ```
+2. Create `run.py`:
+   ```python
+   from continuum_engine_client.client_kernel import ContinuumClient
+   client = ContinuumClient(
+       endpoint_url="<YOUR_PROVISIONED_ENDPOINT>",
+       auth_header_name="<HEADER_REVEALED_POST_PURCHASE>",
+       continuum_token="<YOUR_PROVISIONED_TOKEN>"
+   )
+   client.ask("Summarize the latest GCP Zero-Trust architecture in 3 bullet points.")
+   ```
+3. Run: `python run.py`
 
-## 6. Baseline measurement and edge-layer optimization (CLI)
+## 6. Zero-Dependency Baseline Probe (CLI)
 
-You can instantly verify the cost-compression logic from your terminal. Replace the placeholders with the exact credentials and hidden protocol headers obtained from your setup console, and enter your prompt in `<ENTER_YOUR_MESSAGE_HERE>`.
+Validate your credentials directly via terminal before writing application code. Replace the variables with values obtained from your setup console.
 
 ### For Mac / Linux (Bash)
 
@@ -79,7 +103,7 @@ You can instantly verify the cost-compression logic from your terminal. Replace 
 # Malicious payloads or protocol guessing will trigger immediate token revocation.
 
 curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" \
-  --max-time 300 \
+  --max-time 180 \
   -H "Content-Type: application/json" \
   -H "<HEADER_REVEALED_POST_PURCHASE>: <YOUR_PROVISIONED_AUTH_TOKEN>" \
   -H "x-client-trace-context: req-$(date +%s)" \
@@ -110,7 +134,7 @@ Invoke-RestMethod -Uri "<YOUR_PROVISIONED_ENDPOINT>" `
       "User-Agent" = "Continuum-Enterprise-Client/1.0"
   } `
   -Body $body `
-  -TimeoutSec 300
+  -TimeoutSec 180
 ```
 
 ### For Windows (CMD)
@@ -119,7 +143,7 @@ Invoke-RestMethod -Uri "<YOUR_PROVISIONED_ENDPOINT>" `
 REM [WARNING] Zero-Trust Gate 0 is active. Payload anomaly detection enabled.
 
 curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
-  --max-time 300 ^
+  --max-time 180 ^
   -H "Content-Type: application/json" ^
   -H "<HEADER_REVEALED_POST_PURCHASE>: <YOUR_PROVISIONED_AUTH_TOKEN>" ^
   -H "x-client-trace-context: req-%RANDOM%" ^
@@ -129,7 +153,7 @@ curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
 
 *(Note: Session state and external storage pointers returned in the payload are automatically managed by the OSS client for subsequent turns, keeping database queries at constant $O(1)$ complexity. For a rich UI experience with a spinner and formatted FinOps tables, integrate the included `client-kernel.js` into your Node.js app.)*
 
-## 7. BFF Integration (Backend For Frontend)
+## 7. Enterprise BFF Integration (Backend For Frontend)
 
 To integrate the engine securely into your own server-side application (protecting your $60 API key from client-side exposure), require the installed kernel and instantiate it with your provisioned credentials.
 
@@ -163,7 +187,7 @@ async function handleUserRequest(userMessage) {
 ```python
 # Keep your credentials secure in your environment variables
 import os
-from continuum_engine import ContinuumClient
+from continuum_engine_client.client_kernel import ContinuumClient
 
 client = ContinuumClient(
     endpoint_url=os.getenv("CONTINUUM_ENDPOINT"),
@@ -211,10 +235,12 @@ When running requests directly via the `.ask()` method in your terminal, the cli
 
 ## 9. Operational Policies (Read Before Use)
 
-To guarantee microsecond-level latency and protect the ecosystem for all verified users, automated perimeter defenses enforce strict, non-negotiable request policies. **Users who fail to comply with the specifications below risk immediate rejection or non-refundable credential revocation:**
+To guarantee microsecond-level edge response and enforce strict FinOps predictability, the gateway applies non-negotiable operational controls:
 
-- **Optimal Payload Constraints:** Keep your input messages concise and structurally clean. Excessively massive payloads (e.g., pasting entire source code repositories or unusually large log files) may be automatically truncated or rejected by the perimeter optimization engine before processing.
-- **Zero-Tolerance Exploit Defense:** Requests utilizing automated vulnerability scanners, or payloads designed to bypass system constraints, are permanently blocked at the edge. Associated credentials will be revoked immediately (403 Access Denied) without refund.
-- **Strict Quota Termination:** The 800-request quota is hard-capped to safeguard against autonomous loop runaways. Once depleted, a new license acquisition is required.
-- **International Use Only:** Transactions originating from Japanese domestic payment networks or IP ranges are automatically rejected at the gateway level due to local tax operational constraints.
-- **Strict Zero-Support Policy:** This open-core distribution is engineered solely for experienced engineers. We provide no interactive debugging, manual onboarding, or post-revocation appeals.
+- **180s Circuit Breaker & Prompt Specificity:** The engine dynamically executes recursive search grounding against official documentation. To prevent cost runaways and infinite search loops, **a strict 180-second hard execution limit (circuit breaker)** is enforced:
+  - **Optimized Prompts (5–20s SLA):** Scoped architectural questions, RFC/standard lookups, error investigations, and deterministic code specifications.
+  - **Hard Timeout (180s Max):** Abstract, open-ended, or philosophical queries force multi-hop grounding depths. Invocations exceeding 180 seconds are forcefully terminated with HTTP 504. Formulate concrete, well-scoped prompts.
+- **Service Availability (Geographic Scope):** This middleware, client kernel, and associated API keys are exclusively intended for global enterprise environments and are **strictly not available for use or purchase within Japan**. Access from restricted jurisdictions is filtered at the gateway level.
+- **Zero-Tolerance Exploit Defense:** Automated vulnerability scans or prompt injection payloads are blocked at Gate 0. Associated credentials will be revoked immediately (403 Access Denied) without refund.
+- **Strict Quota Cap:** The 800-request quota is hard-capped to safeguard against autonomous loop runaways. Once depleted, a new license acquisition is required.
+- **Zero-Support Policy:** Engineered exclusively for experienced systems engineers. We provide no interactive debugging, manual onboarding, or post-revocation appeals.
