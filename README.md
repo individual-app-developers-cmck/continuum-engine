@@ -155,14 +155,20 @@ curl -X POST "<YOUR_PROVISIONED_ENDPOINT>" ^
 
 ## 7. Enterprise BFF Integration (Backend For Frontend)
 
-To integrate the engine securely into your own server-side application (protecting your $60 API key from client-side exposure), require the installed kernel and instantiate it with your provisioned credentials.
+To integrate the engine securely into your own server-side application (protecting your $60 API key from client-side exposure), **three fundamental components must be in place** (similar to standard GCP/AWS SDK integrations):
+
+1. **The Package:** Ensure the client kernel is installed in your server environment (`npm install continuum-engine-client` or `pip install continuum-engine-client`).
+2. **Environment Variables:** Securely mount your provisioned credentials in your server's `.env` file or a cloud secret manager (e.g., GCP Secret Manager, AWS Secrets Manager).
+3. **Server Implementation:** Import the kernel and instantiate it within your server's routing file (e.g., `server.js` or `main.py`).
 
 ### Node.js (Express) Example
 
 ```javascript
-// Keep your credentials secure in your .env file
+// 1. Ensure package is installed
+// 2. Keep your credentials secure in your .env file
 const ContinuumClient = require("continuum-engine-client");
 
+// 3. Instantiate and integrate into your route
 const client = new ContinuumClient(
   process.env.CONTINUUM_ENDPOINT,
   process.env.CONTINUUM_HEADER_NAME,
@@ -185,10 +191,12 @@ async function handleUserRequest(userMessage) {
 ### Python (FastAPI / Flask) Example
 
 ```python
-# Keep your credentials secure in your environment variables
+# 1. Ensure package is installed
+# 2. Keep your credentials secure in your environment variables
 import os
 from continuum_engine_client.client_kernel import ContinuumClient
 
+# 3. Instantiate and integrate into your route
 client = ContinuumClient(
     endpoint_url=os.getenv("CONTINUUM_ENDPOINT"),
     auth_header_name=os.getenv("CONTINUUM_HEADER_NAME"),
