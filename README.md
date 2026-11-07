@@ -46,7 +46,7 @@ Production access rights are provisioned exclusively as a one-time infrastructur
 
 To shield our infrastructure, credentials are issued solely via our verified checkout gate:
 
-[![Stripe Checkout](https://img.shields.io/badge/Stripe%20Checkout-Activate%20Private%20Engine%20%28%2460%29-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/test_28E7sKgOGe3Z3n66ec6oo00)
+[![Stripe Checkout](https://img.shields.io/badge/Stripe%20Checkout-Activate%20Private%20Engine%20%28%2460%29-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/eVq28t2qB4mneGfc336sw00)
 
 *Protected by Stripe Checkout & Zero-Trust Origin Verification*
 
