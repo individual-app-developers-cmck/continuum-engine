@@ -50,12 +50,12 @@ Before integrating the engine into your codebase, experience the "feel" of Conti
 
 **For Node.js users:**
 ```bash
-node demo-continuum.js "What is GCP Zero-Trust?"
+node run_simulator.js "What is GCP Zero-Trust?"
 ```
 
 **For Python users:**
 ```bash
-python demo_continuum.py "What is GCP Zero-Trust?"
+python run_simulator.py "What is GCP Zero-Trust?"
 ```
 
 ---
