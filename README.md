@@ -1,5 +1,7 @@
 # Continuum Engine
 
+> 🎥 **[Watch the 12-Second Live CLI Demo](./DEMO.md)** — Observe how Continuum Engine visualizes the dedicated background labor of Superintelligence and optimizes 1,380 tokens at Gate 0 in real time.
+
 **Enterprise middleware aimed at visualizing the "dedicated labor" of Superintelligence (SI) and bringing complete transparency to inference operations.**
 
 ## 1. System Philosophy: Visualizing the Dedicated Labor of SI
@@ -73,9 +75,9 @@ To shield our infrastructure, credentials are issued solely via our verified che
 
 _Protected by Stripe Checkout & Zero-Trust Origin Verification_
 
-**Authorization Steps:**
-1. **Authorize:** Complete the one-time $60 license acquisition via the activation badge above (or by opening the included `setup.html` locally).
-2. **Deterministic Redirect:** Upon verified checkout, you are redirected immediately to the private setup console (`setup.html`) with your transaction-bound session proof.
+**Authorization & Setup Sequence:**
+1. **Acquire License:** Complete the one-time $60 license acquisition via Stripe Checkout.
+2. **Access Setup Console (`setup.html`):** Upon verified checkout, you are redirected immediately to the private `setup.html` console with your transaction-bound session proof to provision your key and client code.
 3. **Provisioning:** Retrieve your private endpoint (`<YOUR_PROVISIONED_ENDPOINT>`), your dedicated API key (`<YOUR_PROVISIONED_AUTH_TOKEN>`), and the **hidden authentication header name**.
 
 ---
