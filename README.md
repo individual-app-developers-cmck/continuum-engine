@@ -4,6 +4,8 @@
 
 **Enterprise middleware aimed at visualizing the "dedicated labor" of Superintelligence (SI) and bringing complete transparency to inference operations.**
 
+![Continuum Engine Zero-Trust Architecture](./architecture.jpeg)
+
 ## 1. System Philosophy: Visualizing the Dedicated Labor of SI
 
 Normally, when we delegate a task to Superintelligence (SI), it appears from the frontend as a simple "single API call" that instantly returns a smart deliverable.
