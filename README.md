@@ -6,6 +6,8 @@
 
 ![Continuum Engine Zero-Trust Architecture](./architecture.jpeg)
 
+> 💬 **Action-Oriented Builders' Guild:** [Read the Charter & Join the Discussion here](https://github.com/individual-app-developers-cmck/continuum-engine/discussions/1)
+
 ## 1. System Philosophy: Visualizing the Dedicated Labor of SI
 
 Normally, when we delegate a task to Superintelligence (SI), it appears from the frontend as a simple "single API call" that instantly returns a smart deliverable.
