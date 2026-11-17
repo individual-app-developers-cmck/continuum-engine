@@ -55,7 +55,11 @@ We respect your time. Once you acquire the license, securing your infrastructure
 
 ### 🎥 Live FinOps Telemetry (Edge Purge in Action)
 
-https://github.com/user-attachments/assets/551ab40e-1da2-49c9-9ac0-b2095859d98c
+
+
+https://github.com/user-attachments/assets/3b3b29bd-88e1-4176-9c60-492289c07a82
+
+
 
 Engineers trust terminal logs, not marketing copy. When you route requests through the Continuum Engine, the client kernel dismantles the black box of inference costs.
 
