@@ -18,6 +18,8 @@ By integrating this engine into your BFF (Backend For Frontend) or package envir
 
 _Protected by Stripe Checkout & Zero-Trust Origin Verification_
 
+[![Stripe Checkout](https://img.shields.io/badge/Stripe%20Checkout-Activate%20Private%20Engine%20%28%2460%29-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/eVq28t2qB4mneGfc336sw00)
+
 ## 1. How It Works (From Checkout to Integration in 3 Minutes)
 
 We respect your time. Once you acquire the license, securing your infrastructure takes only three steps:
@@ -53,7 +55,7 @@ We respect your time. Once you acquire the license, securing your infrastructure
 
 ### 🎥 Live FinOps Telemetry (Edge Purge in Action)
 
-![CLI Demo](demo.gif)
+https://github.com/user-attachments/assets/551ab40e-1da2-49c9-9ac0-b2095859d98c
 
 Engineers trust terminal logs, not marketing copy. When you route requests through the Continuum Engine, the client kernel dismantles the black box of inference costs.
 
