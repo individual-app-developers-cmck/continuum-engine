@@ -79,6 +79,8 @@ We respect your time. Once you acquire the license, securing your infrastructure
 
 1. **Checkout & Provisioning**: Complete the $60 transaction above. You will be immediately redirected to a secure `setup.html` console where your private API key and dedicated endpoint are instantly provisioned.
 
+   *(Note: The `setup.html` console, along with the simulator and integration examples, is hosted in our [GitHub Repository](https://github.com/individual-app-developers-cmck/continuum-engine). If you are building a production BFF, clone the repository to access the core integration files.)*
+
 2. **Install the Client Kernel**:
 
    ```bash
